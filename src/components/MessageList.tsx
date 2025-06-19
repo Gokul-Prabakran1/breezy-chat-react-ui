@@ -56,11 +56,11 @@ const MessageList: React.FC<MessageListProps> = ({ messages, currentUserId }) =>
   return (
     <div className="space-y-6">
       {Object.entries(groupedMessages).map(([dateKey, dayMessages]) => (
-        <div key={dateKey} className="space-y-4">
+        <div key={dateKey} className="space-y-2">
           {/* Date separator */}
-          <div className="flex items-center justify-center">
-            <div className="glass-dark px-3 py-1 rounded-full">
-              <span className="text-xs font-medium text-gray-300">
+          <div className="flex items-center justify-center my-4">
+            <div className="bg-white border border-gray-200 px-4 py-1 rounded-full shadow-sm">
+              <span className="text-xs font-medium text-gray-600">
                 {formatDate(new Date(dateKey))}
               </span>
             </div>
@@ -73,9 +73,9 @@ const MessageList: React.FC<MessageListProps> = ({ messages, currentUserId }) =>
 
             if (isSystemMessage) {
               return (
-                <div key={message.id} className="flex justify-center">
-                  <div className="glass px-4 py-2 rounded-full max-w-md">
-                    <p className="text-sm text-gray-300 text-center">
+                <div key={message.id} className="flex justify-center my-6">
+                  <div className="bg-blue-50 border border-blue-200 px-4 py-2 rounded-lg max-w-md">
+                    <p className="text-sm text-blue-800 text-center font-medium">
                       {message.message}
                     </p>
                   </div>
@@ -84,32 +84,26 @@ const MessageList: React.FC<MessageListProps> = ({ messages, currentUserId }) =>
             }
 
             return (
-              <div
-                key={message.id}
-                className={`flex ${
-                  isOwnMessage ? 'justify-end' : 'justify-start'
-                } fade-in-up`}
-              >
-                <div
-                  className={`max-w-xs sm:max-w-md px-4 py-3 rounded-2xl ${
-                    isOwnMessage
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-br-sm'
-                      : 'glass text-white rounded-bl-sm'
-                  }`}
-                >
-                  {!isOwnMessage && (
-                    <p className="text-xs font-semibold text-blue-300 mb-1">
-                      {message.username}
-                    </p>
-                  )}
-                  <p className="text-sm leading-relaxed">{message.message}</p>
-                  <p
-                    className={`text-xs mt-2 ${
-                      isOwnMessage ? 'text-blue-100' : 'text-gray-400'
-                    }`}
-                  >
-                    {formatTime(message.timestamp)}
-                  </p>
+              <div key={message.id} className="group hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors">
+                <div className="flex items-start space-x-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold flex-shrink-0">
+                    {message.username.charAt(0).toUpperCase()}
+                  </div>
+                  
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline space-x-2 mb-1">
+                      <span className="text-sm font-semibold text-gray-900">
+                        {message.username}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {formatTime(message.timestamp)}
+                      </span>
+                    </div>
+                    
+                    <div className="text-sm text-gray-800 leading-relaxed">
+                      {message.message}
+                    </div>
+                  </div>
                 </div>
               </div>
             );
