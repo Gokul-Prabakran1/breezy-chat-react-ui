@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Send, LogOut, Users, MessageCircle, Menu, Hash, Plus } from 'lucide-react';
@@ -35,7 +34,7 @@ const Chat = () => {
     {
       id: '3',
       username: 'Bob Wilson',
-      message: 'Great work Alice! I'll run the automated tests and let you know the results.',
+      message: 'Great work Alice! I\'ll run the automated tests and let you know the results.',
       timestamp: new Date(Date.now() - 1000 * 60 * 3),
       userId: 'user3',
     },
