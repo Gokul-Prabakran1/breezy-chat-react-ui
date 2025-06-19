@@ -1,9 +1,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Send, LogOut, Users, MessageCircle } from 'lucide-react';
+import { Send, LogOut, Users, MessageCircle, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
 import MessageList from '../components/MessageList';
 import OnlineUsers from '../components/OnlineUsers';
 
@@ -73,18 +74,18 @@ const Chat = () => {
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen bg-gray-50 flex">
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="glass-dark border-b border-white/10 p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-              <MessageCircle className="h-6 w-6 text-white" />
+        <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between card-shadow">
+          <div className="flex items-center space-x-4">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <MessageCircle className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">DevOps Chat</h1>
-              <p className="text-gray-400 text-sm">Welcome back, {user?.name}!</p>
+              <h1 className="text-xl font-semibold text-gray-900">DevOps Chat</h1>
+              <p className="text-sm text-gray-600">Welcome back, {user?.name}!</p>
             </div>
           </div>
           
@@ -93,7 +94,7 @@ const Chat = () => {
               onClick={() => setShowOnlineUsers(!showOnlineUsers)}
               variant="ghost"
               size="sm"
-              className="text-gray-300 hover:text-white hover:bg-white/10 md:hidden"
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 md:hidden"
             >
               <Users className="h-5 w-5" />
             </Button>
@@ -101,7 +102,7 @@ const Chat = () => {
               onClick={handleLogout}
               variant="ghost"
               size="sm"
-              className="text-gray-300 hover:text-white hover:bg-white/10"
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             >
               <LogOut className="h-5 w-5" />
               <span className="hidden sm:inline ml-2">Logout</span>
@@ -112,33 +113,33 @@ const Chat = () => {
         {/* Messages Area */}
         <div className="flex-1 overflow-hidden flex">
           <div className="flex-1 flex flex-col">
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
               <MessageList messages={messages} currentUserId={user?.id || ''} />
               <div ref={messagesEndRef} />
             </div>
 
             {/* Message Input */}
-            <div className="glass-dark border-t border-white/10 p-4">
+            <div className="bg-white border-t border-gray-200 p-4 card-shadow">
               <form onSubmit={handleSendMessage} className="flex space-x-3">
                 <Input
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400"
+                  className="flex-1 h-11 border-gray-200 focus:border-primary focus:ring-primary"
                 />
                 <Button
                   type="submit"
                   disabled={!newMessage.trim()}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6"
+                  className="bg-primary hover:bg-primary/90 text-white px-6 h-11"
                 >
-                  <Send className="h-5 w-5" />
+                  <Send className="h-4 w-4" />
                 </Button>
               </form>
             </div>
           </div>
 
           {/* Online Users Sidebar - Desktop */}
-          <div className="hidden md:block w-64 border-l border-white/10">
+          <div className="hidden md:block w-72 border-l border-gray-200 bg-white">
             <OnlineUsers />
           </div>
         </div>
@@ -146,15 +147,15 @@ const Chat = () => {
 
       {/* Mobile Online Users Overlay */}
       {showOnlineUsers && (
-        <div className="md:hidden fixed inset-0 bg-black/50 z-50 flex">
-          <div className="ml-auto w-64 h-full glass-dark slide-in-right">
-            <div className="p-4 border-b border-white/10 flex items-center justify-between">
-              <h3 className="font-semibold text-white">Online Users</h3>
+        <div className="md:hidden fixed inset-0 bg-black/20 z-50 flex">
+          <div className="ml-auto w-72 h-full bg-white card-shadow-xl slide-in-right">
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 className="font-semibold text-gray-900">Online Users</h3>
               <Button
                 onClick={() => setShowOnlineUsers(false)}
                 variant="ghost"
                 size="sm"
-                className="text-gray-300 hover:text-white"
+                className="text-gray-600 hover:text-gray-900"
               >
                 ×
               </Button>

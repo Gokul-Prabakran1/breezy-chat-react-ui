@@ -6,6 +6,7 @@ import { Eye, EyeOff, Mail, Lock, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -48,80 +49,88 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8 fade-in-up">
-        <div className="text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+      <div className="w-full max-w-md fade-in-up">
+        <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="p-3 glass rounded-full float-animation">
-              <MessageCircle className="h-8 w-8 text-blue-400" />
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <MessageCircle className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold gradient-text">Welcome Back</h1>
-          <p className="text-gray-300 mt-2">Sign in to continue chatting</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
+          <p className="text-gray-600">Sign in to your account to continue</p>
         </div>
 
-        <div className="glass rounded-xl p-8 shadow-2xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-200">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400"
-                  placeholder="Enter your email"
-                />
+        <Card className="card-shadow-lg border-0">
+          <CardHeader className="space-y-1 pb-6">
+            <CardTitle className="text-2xl font-semibold text-center">Sign in</CardTitle>
+            <CardDescription className="text-center">
+              Enter your credentials to access your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-primary"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
-              {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-200">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400"
-                  placeholder="Enter your password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-white transition-colors"
-                >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                </button>
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-medium text-gray-700">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 pr-10 h-11 border-gray-200 focus:border-primary focus:ring-primary"
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+                {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
               </div>
-              {errors.password && <p className="text-red-400 text-sm">{errors.password}</p>}
-            </div>
 
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
-            >
-              {isLoading ? 'Signing in...' : 'Sign In'}
-            </Button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-300">
-              Don't have an account?{' '}
-              <Link
-                to="/register"
-                className="text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-medium"
               >
-                Sign up here
-              </Link>
-            </p>
-          </div>
-        </div>
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </Button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Don't have an account?{' '}
+                <Link
+                  to="/register"
+                  className="text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  Create one here
+                </Link>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
