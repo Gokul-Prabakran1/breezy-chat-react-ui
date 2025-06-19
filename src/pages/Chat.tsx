@@ -81,10 +81,10 @@ const Chat = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-50 flex overflow-hidden">
+    <div className="h-screen bg-slate-50 flex overflow-hidden">
       {/* Left Sidebar - Channel List */}
-      <div className="hidden lg:flex w-64 bg-gray-900 flex-col">
-        <div className="p-4 border-b border-gray-700">
+      <div className="hidden lg:flex w-64 bg-slate-800 flex-col">
+        <div className="p-4 border-b border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <MessageCircle className="h-5 w-5 text-white" />
@@ -94,24 +94,24 @@ const Chat = () => {
         </div>
         
         <div className="flex-1 p-4 space-y-2">
-          <div className="text-gray-400 text-xs uppercase font-semibold tracking-wide mb-2">
+          <div className="text-slate-400 text-xs uppercase font-semibold tracking-wide mb-2">
             Channels
           </div>
           <div className="flex items-center space-x-2 px-2 py-1.5 text-white bg-blue-600 rounded-md">
             <Hash className="h-4 w-4" />
             <span className="text-sm font-medium">general</span>
           </div>
-          <div className="flex items-center space-x-2 px-2 py-1.5 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md cursor-pointer">
+          <div className="flex items-center space-x-2 px-2 py-1.5 text-slate-300 hover:text-white hover:bg-slate-700 rounded-md cursor-pointer">
             <Hash className="h-4 w-4" />
             <span className="text-sm">devops-alerts</span>
           </div>
-          <div className="flex items-center space-x-2 px-2 py-1.5 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md cursor-pointer">
+          <div className="flex items-center space-x-2 px-2 py-1.5 text-slate-300 hover:text-white hover:bg-slate-700 rounded-md cursor-pointer">
             <Hash className="h-4 w-4" />
             <span className="text-sm">deployments</span>
           </div>
         </div>
 
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
               <span className="text-white text-sm font-semibold">
@@ -129,21 +129,21 @@ const Chat = () => {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Top Header */}
-        <div className="bg-white border-b border-gray-200 px-4 lg:px-6 py-3 flex items-center justify-between">
+        <div className="bg-white border-b border-slate-200 px-4 lg:px-6 py-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center space-x-4">
             <Button
               onClick={() => setShowOnlineUsers(!showOnlineUsers)}
               variant="ghost"
               size="sm"
-              className="lg:hidden text-gray-600 hover:text-gray-900"
+              className="lg:hidden text-slate-600 hover:text-slate-900"
             >
               <Menu className="h-5 w-5" />
             </Button>
             <div className="flex items-center space-x-2">
-              <Hash className="h-5 w-5 text-gray-600" />
-              <h2 className="text-lg font-semibold text-gray-900">general</h2>
+              <Hash className="h-5 w-5 text-slate-600" />
+              <h2 className="text-lg font-semibold text-slate-900">general</h2>
             </div>
-            <div className="hidden sm:flex items-center text-sm text-gray-500">
+            <div className="hidden sm:flex items-center text-sm text-slate-500">
               <span>Team workspace</span>
             </div>
           </div>
@@ -153,7 +153,7 @@ const Chat = () => {
               onClick={() => setShowOnlineUsers(!showOnlineUsers)}
               variant="ghost"
               size="sm"
-              className="hidden lg:flex text-gray-600 hover:text-gray-900"
+              className="hidden lg:flex text-slate-600 hover:text-slate-900"
             >
               <Users className="h-5 w-5" />
               <span className="hidden xl:inline ml-2">Members</span>
@@ -162,7 +162,7 @@ const Chat = () => {
               onClick={handleLogout}
               variant="ghost"
               size="sm"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-slate-600 hover:text-slate-900"
             >
               <LogOut className="h-5 w-5" />
               <span className="hidden sm:inline ml-2">Sign out</span>
@@ -179,33 +179,33 @@ const Chat = () => {
             </div>
 
             {/* Message Input */}
-            <div className="bg-white border-t border-gray-200 p-4 lg:p-6">
+            <div className="bg-white border-t border-slate-200 p-4 lg:p-6">
               <form onSubmit={handleSendMessage} className="flex space-x-3">
                 <div className="flex-1 relative">
                   <Input
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Message #general"
-                    className="pr-12 h-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                    className="pr-12 h-10 border-slate-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
                   />
                   <Button
                     type="submit"
                     disabled={!newMessage.trim()}
                     size="sm"
-                    className="absolute right-1 top-1 h-8 w-8 p-0 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300"
+                    className="absolute right-1 top-1 h-8 w-8 p-0 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300"
                   >
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
               </form>
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs text-slate-500 mt-2">
                 Press Enter to send your message
               </p>
             </div>
           </div>
 
           {/* Right Sidebar - Online Users (Desktop) */}
-          <div className={`${showOnlineUsers ? 'block' : 'hidden'} lg:block w-72 border-l border-gray-200 bg-white`}>
+          <div className={`${showOnlineUsers ? 'block' : 'hidden'} lg:block w-72 border-l border-slate-200 bg-white`}>
             <OnlineUsers />
           </div>
         </div>
@@ -215,13 +215,13 @@ const Chat = () => {
       {showOnlineUsers && (
         <div className="lg:hidden fixed inset-0 bg-black/20 z-50 flex">
           <div className="ml-auto w-72 h-full bg-white shadow-xl">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="font-semibold text-gray-900">Team Members</h3>
+            <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+              <h3 className="font-semibold text-slate-900">Team Members</h3>
               <Button
                 onClick={() => setShowOnlineUsers(false)}
                 variant="ghost"
                 size="sm"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-slate-600 hover:text-slate-900"
               >
                 ×
               </Button>
