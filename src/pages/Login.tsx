@@ -49,81 +49,95 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 p-4">
-      <div className="w-full max-w-md fade-in-up">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary/10 rounded-xl">
-              <MessageCircle className="h-8 w-8 text-primary" />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-50 p-4">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-8 fade-in-up">
+          <div className="flex justify-center mb-6">
+            <div className="p-3 gradient-primary rounded-2xl shadow-lg">
+              <MessageCircle className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-          <p className="text-gray-600">Sign in to your account to continue</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+            Welcome back
+          </h1>
+          <p className="text-gray-600 font-medium">Sign in to continue to Chatify</p>
         </div>
 
-        <Card className="card-shadow-lg border-0">
-          <CardHeader className="space-y-1 pb-6">
-            <CardTitle className="text-2xl font-semibold text-center">Sign in</CardTitle>
-            <CardDescription className="text-center">
+        {/* Login Card */}
+        <Card className="card-shadow-xl border-0 bg-white/80 backdrop-blur-sm scale-in">
+          <CardHeader className="space-y-2 pb-8">
+            <CardTitle className="text-2xl font-semibold text-center text-gray-900">
+              Sign in
+            </CardTitle>
+            <CardDescription className="text-center text-gray-600">
               Enter your credentials to access your account
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <CardContent className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
+                <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                  Email address
+                </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-primary"
+                    className="pl-10 h-12 border-gray-200 focus:border-primary focus:ring-primary/20 rounded-xl"
                     placeholder="Enter your email"
                   />
                 </div>
-                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 text-sm font-medium">{errors.email}</p>}
               </div>
 
+              {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700">Password</Label>
+                <Label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                  Password
+                </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-11 border-gray-200 focus:border-primary focus:ring-primary"
+                    className="pl-10 pr-10 h-12 border-gray-200 focus:border-primary focus:ring-primary/20 rounded-xl"
                     placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
-                {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                {errors.password && <p className="text-red-500 text-sm font-medium">{errors.password}</p>}
               </div>
 
+              {/* Submit Button */}
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-medium"
+                className="w-full h-12 gradient-primary hover:opacity-90 text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </Button>
             </form>
 
-            <div className="mt-6 text-center">
+            {/* Register Link */}
+            <div className="text-center pt-4 border-t border-gray-100">
               <p className="text-sm text-gray-600">
                 Don't have an account?{' '}
                 <Link
                   to="/register"
-                  className="text-primary hover:text-primary/80 font-medium transition-colors"
+                  className="text-primary hover:text-primary/80 font-semibold transition-colors"
                 >
                   Create one here
                 </Link>
