@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plus, FileText, CheckSquare, Calendar, Search, Settings, LogOut, User } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Plus, FileText, CheckSquare, Calendar, Search, Settings, LogOut, User, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '../contexts/AuthContext';
@@ -9,22 +9,33 @@ import NotesView from '@/components/NotesView';
 import HabitsView from '@/components/HabitsView';
 import WeeklyPlanView from '@/components/WeeklyPlanView';
 
-type ViewType = 'notes' | 'habits' | 'weekly';
+type ViewType = 'dashboard' | 'notes' | 'habits' | 'weekly';
 
 const Dashboard = () => {
-  const [currentView, setCurrentView] = useState<ViewType>('notes');
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  // Determine current view based on route
+  const getCurrentView = (): ViewType => {
+    const path = location.pathname;
+    if (path === '/notes') return 'notes';
+    if (path === '/habits') return 'habits';
+    if (path === '/weekly-plan') return 'weekly';
+    return 'dashboard';
+  };
+
+  const currentView = getCurrentView();
+
   const sidebarItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/dashboard', color: 'from-gray-500 to-slate-500' },
     { id: 'notes', label: 'Notes', icon: FileText, path: '/notes', color: 'from-blue-500 to-indigo-500' },
     { id: 'habits', label: 'Habits', icon: CheckSquare, path: '/habits', color: 'from-green-500 to-emerald-500' },
     { id: 'weekly', label: 'Weekly Plan', icon: Calendar, path: '/weekly-plan', color: 'from-purple-500 to-pink-500' },
   ];
 
-  const handleNavigation = (path: string, viewId: string) => {
-    setCurrentView(viewId as ViewType);
+  const handleNavigation = (path: string) => {
     navigate(path);
   };
 
@@ -42,7 +53,59 @@ const Dashboard = () => {
       case 'weekly':
         return <WeeklyPlanView />;
       default:
-        return <NotesView searchQuery={searchQuery} />;
+        return (
+          <div className="p-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+                  Welcome to your Workspace
+                </h1>
+                <p className="text-xl text-gray-600">Organize your thoughts, track habits, and plan your week</p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                {sidebarItems.slice(1).map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => handleNavigation(item.path)}
+                      className="group cursor-pointer bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100"
+                    >
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}>
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.label}</h3>
+                      <p className="text-gray-600">
+                        {item.id === 'notes' && 'Capture and organize your thoughts and ideas'}
+                        {item.id === 'habits' && 'Track your daily habits and build consistency'}
+                        {item.id === 'weekly' && 'Plan and organize your week effectively'}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        );
+    }
+  };
+
+  const getViewTitle = () => {
+    switch (currentView) {
+      case 'notes': return 'Notes';
+      case 'habits': return 'Habits';
+      case 'weekly': return 'Weekly Plan';
+      default: return 'Dashboard';
+    }
+  };
+
+  const getViewDescription = () => {
+    switch (currentView) {
+      case 'notes': return 'Organize your thoughts and ideas';
+      case 'habits': return 'Build better habits, one day at a time';
+      case 'weekly': return 'Plan and organize your week';
+      default: return 'Your personal productivity workspace';
     }
   };
 
@@ -73,22 +136,34 @@ const Dashboard = () => {
         <nav className="flex-1 p-4 space-y-2">
           {sidebarItems.map((item) => {
             const Icon = item.icon;
+            const isActive = (currentView === 'dashboard' && item.id === 'dashboard') || 
+                           (currentView !== 'dashboard' && currentView === item.id);
+            
             return (
               <button
                 key={item.id}
-                onClick={() => handleNavigation(item.path, item.id)}
-                className="w-full group relative overflow-hidden rounded-xl p-4 text-left transition-all duration-200 hover:bg-gray-50 hover:shadow-md"
+                onClick={() => handleNavigation(item.path)}
+                className={`w-full group relative overflow-hidden rounded-xl p-4 text-left transition-all duration-200 hover:bg-gray-50 hover:shadow-md ${
+                  isActive ? 'bg-gray-100 shadow-sm' : ''
+                }`}
               >
-                <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-200`} />
+                <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-200 ${
+                  isActive ? 'opacity-10' : ''
+                }`} />
                 <div className="relative flex items-center space-x-3">
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${item.color} shadow-lg`}>
+                  <div className={`p-2 rounded-lg bg-gradient-to-r ${item.color} shadow-lg ${
+                    isActive ? 'scale-110' : ''
+                  } transition-transform duration-200`}>
                     <Icon className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 group-hover:text-gray-800">
+                    <p className={`font-semibold group-hover:text-gray-800 ${
+                      isActive ? 'text-gray-900' : 'text-gray-700'
+                    }`}>
                       {item.label}
                     </p>
                     <p className="text-sm text-gray-500">
+                      {item.id === 'dashboard' && 'Overview & quick access'}
                       {item.id === 'notes' && 'Capture your thoughts'}
                       {item.id === 'habits' && 'Track your progress'}
                       {item.id === 'weekly' && 'Plan your week'}
@@ -123,14 +198,10 @@ const Dashboard = () => {
             <div className="flex items-center space-x-6">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900">
-                  {currentView === 'notes' && 'Notes'}
-                  {currentView === 'habits' && 'Habits'}
-                  {currentView === 'weekly' && 'Weekly Plan'}
+                  {getViewTitle()}
                 </h2>
                 <p className="text-gray-500 mt-1">
-                  {currentView === 'notes' && 'Organize your thoughts and ideas'}
-                  {currentView === 'habits' && 'Build better habits, one day at a time'}
-                  {currentView === 'weekly' && 'Plan and organize your week'}
+                  {getViewDescription()}
                 </p>
               </div>
             </div>

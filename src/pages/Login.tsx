@@ -42,7 +42,7 @@ const Login = () => {
     
     try {
       await login(email, password);
-      navigate('/chat');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -61,7 +61,7 @@ const Login = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
             Welcome back
           </h1>
-          <p className="text-gray-600 font-medium">Sign in to continue to Chatify</p>
+          <p className="text-gray-600 font-medium">Sign in to continue to Workspace</p>
         </div>
 
         {/* Login Card */}
@@ -119,6 +119,16 @@ const Login = () => {
                   </button>
                 </div>
                 {errors.password && <p className="text-red-500 text-sm font-medium">{errors.password}</p>}
+              </div>
+
+              {/* Forgot Password Link */}
+              <div className="flex justify-end">
+                <Link
+                  to="/forgot-password"
+                  className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  Forgot password?
+                </Link>
               </div>
 
               {/* Submit Button */}

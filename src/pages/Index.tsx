@@ -10,7 +10,7 @@ const Index = () => {
   useEffect(() => {
     if (!isLoading) {
       if (user) {
-        navigate('/chat', { replace: true });
+        navigate('/dashboard', { replace: true });
       } else {
         navigate('/login', { replace: true });
       }
@@ -19,10 +19,13 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-indigo-100">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-300">Loading...</p>
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-4 mx-auto animate-pulse">
+            <div className="w-8 h-8 bg-white rounded-lg"></div>
+          </div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading your workspace...</p>
         </div>
       </div>
     );
