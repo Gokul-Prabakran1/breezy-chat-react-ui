@@ -77,7 +77,7 @@ const NotesView: React.FC<NotesViewProps> = ({ searchQuery }) => {
       <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Notes</h2>
+            <h2 className="text-lg font-medium">Notes</h2>
             <Button
               size="sm"
               onClick={() => setIsCreating(true)}
@@ -93,7 +93,7 @@ const NotesView: React.FC<NotesViewProps> = ({ searchQuery }) => {
                 placeholder="Note title..."
                 value={newNoteTitle}
                 onChange={(e) => setNewNoteTitle(e.target.value)}
-                className="text-sm"
+                className="text-sm font-virgil-notes"
               />
               <div className="flex space-x-2">
                 <Button size="sm" onClick={createNote}>
@@ -150,7 +150,7 @@ const NotesView: React.FC<NotesViewProps> = ({ searchQuery }) => {
                 setSelectedNote(updated);
                 updateNote(updated);
               }}
-              className="text-2xl font-bold border-none p-0 mb-4 focus:ring-0"
+              className="text-xl font-medium border-none p-0 mb-4 focus:ring-0 font-virgil-notes"
               placeholder="Untitled"
             />
             <Textarea
@@ -161,7 +161,7 @@ const NotesView: React.FC<NotesViewProps> = ({ searchQuery }) => {
                 updateNote(updated);
               }}
               placeholder="Start writing..."
-              className="flex-1 border-none resize-none text-base leading-relaxed focus:ring-0"
+              className="flex-1 border-none resize-none text-base leading-relaxed focus:ring-0 font-virgil-notes"
               rows={20}
             />
           </div>
