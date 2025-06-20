@@ -57,10 +57,10 @@ const Dashboard = () => {
           <div className="p-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+                <h1 className="text-2xl font-medium text-gray-900 mb-4">
                   Welcome to your Workspace
                 </h1>
-                <p className="text-xl text-gray-600">Organize your thoughts, track habits, and plan your week</p>
+                <p className="text-lg font-virgil text-gray-600">Organize your thoughts, track habits, and plan your week</p>
               </div>
               
               <div className="grid md:grid-cols-3 gap-6">
@@ -75,8 +75,8 @@ const Dashboard = () => {
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}>
                         <Icon className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.label}</h3>
-                      <p className="text-gray-600">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">{item.label}</h3>
+                      <p className="font-virgil text-gray-600">
                         {item.id === 'notes' && 'Capture and organize your thoughts and ideas'}
                         {item.id === 'habits' && 'Track your daily habits and build consistency'}
                         {item.id === 'weekly' && 'Plan and organize your week effectively'}
@@ -119,8 +119,8 @@ const Dashboard = () => {
               <span className="text-white font-bold text-lg">W</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Workspace</h1>
-              <p className="text-sm text-gray-500">Welcome back, {user?.name}</p>
+              <h1 className="text-lg font-medium text-gray-900">Workspace</h1>
+              <p className="text-sm font-virgil text-gray-500">Welcome back, {user?.name}</p>
             </div>
           </div>
           
@@ -157,12 +157,12 @@ const Dashboard = () => {
                     <Icon className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <p className={`font-semibold group-hover:text-gray-800 ${
+                    <p className={`font-medium group-hover:text-gray-800 ${
                       isActive ? 'text-gray-900' : 'text-gray-700'
                     }`}>
                       {item.label}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm font-virgil text-gray-500">
                       {item.id === 'dashboard' && 'Overview & quick access'}
                       {item.id === 'notes' && 'Capture your thoughts'}
                       {item.id === 'habits' && 'Track your progress'}
@@ -197,10 +197,10 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">
+                <h2 className="text-2xl font-medium text-gray-900">
                   {getViewTitle()}
                 </h2>
-                <p className="text-gray-500 mt-1">
+                <p className="font-virgil text-gray-500 mt-1">
                   {getViewDescription()}
                 </p>
               </div>
@@ -213,14 +213,14 @@ const Dashboard = () => {
                   placeholder="Search everything..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 focus:bg-white focus:border-purple-500 focus:ring-purple-500/20 rounded-xl"
+                  className="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 focus:bg-white focus:border-purple-500 focus:ring-purple-500/20 rounded-xl font-virgil"
                 />
               </div>
               <div className="flex items-center space-x-2 bg-gray-50 rounded-full px-3 py-2">
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center">
                   <User className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-sm font-medium text-gray-700">{user?.name}</span>
+                <span className="text-sm font-virgil text-gray-700">{user?.name}</span>
               </div>
             </div>
           </div>
